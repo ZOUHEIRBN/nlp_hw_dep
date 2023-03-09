@@ -24,7 +24,7 @@ class DependencyToken:
 
 
 def traverse(rev_head, h, visited):
-    if rev_head.has_key(h):
+    if h in rev_head:
         for d in rev_head[h]:
             if d in visited:
                 return True

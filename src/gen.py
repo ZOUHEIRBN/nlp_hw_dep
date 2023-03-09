@@ -14,4 +14,4 @@ for i, sen in enumerate(read_conll(os.path.abspath(sys.argv[1]))):
             conf.do(act, l)
     if (i+1) % 100 == 0: sys.stdout.write(str(i+1) + '...')
 writer.close()
-print 'done!'
+print('done')

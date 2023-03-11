@@ -11,7 +11,7 @@ def generate_vocab_files(src, dest):
 	label_vocab.add('<null>')
 
 
-	for i, sen in enumerate(read_conll(os.path.abspath())):
+	for i, sen in enumerate(read_conll(os.path.abspath(src))):
 		if is_projective([e.head for e in sen[1:]]):
 			for e in sen:
 				word_vocab[e.form]+=1
@@ -34,20 +34,27 @@ def generate_vocab_files(src, dest):
 			pv[p] = len(pv)
 
 
+	result = {}
 	w_vocab_writer = codecs.open(os.path.abspath(dest)+'.word','w')
 	for w in wv.keys():
 		w_vocab_writer.write(w+' '+str(wv[w])+'\n')
 	w_vocab_writer.close()
+	
+	result['words'] = wv
 
 	p_vocab_writer = codecs.open(os.path.abspath(dest)+'.pos','w')
 	for i, p in enumerate(pos_vocab):
 		p_vocab_writer.write(p+' '+str(i)+'\n')
 	p_vocab_writer.close()
+	
+	result['pos'] = {p: i for i, p in enumerate(pos_vocab)}
 
-	a_vocab_writer = codecs.open(os.path.abspath(dest)+'.labels','w')
+	l_vocab_writer = codecs.open(os.path.abspath(dest)+'.labels','w')
 	for i, d in enumerate(label_vocab):
-		a_vocab_writer.write(d+' '+str(i)+'\n')
-	a_vocab_writer.close()
+		l_vocab_writer.write(d+' '+str(i)+'\n')
+	l_vocab_writer.close()
+	
+	result['labels'] = {l: i for i, l in enumerate(label_vocab)}
 
 	a_vocab_writer = codecs.open(os.path.abspath(dest)+'.actions','w')
 	a_vocab_writer.write('SHIFT'+' 0' +'\n')
@@ -58,6 +65,14 @@ def generate_vocab_files(src, dest):
 
 	a_vocab_writer.close()
 
+	actionlist = ['SHIFT']
+	actionlist += ['LEFT-ARC:'+d for d in label_vocab]
+	actionlist += ['RIGHT-ARC:'+d for d in label_vocab]
+	
+	result['actions'] = {a: i for i, a in enumerate(actionlist)}
+	
+	return result
+	
 	
 if __name__ == "__main__":
 	src = sys.argv[1]

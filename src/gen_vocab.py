@@ -1,6 +1,6 @@
 import os, sys
 from collections import defaultdict
-from utils import *
+from .utils import *
 
 def generate_vocab_files(src, dest):
 	word_vocab = defaultdict(int)

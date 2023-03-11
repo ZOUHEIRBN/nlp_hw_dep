@@ -35,35 +35,35 @@ def generate_vocab_files(src, dest):
 
 
 	result = {}
-	w_vocab_writer = codecs.open(os.path.abspath(dest)+'.word','w',encoding='utf8')
-	for w in wv.keys():
-		w_vocab_writer.write(w+' '+str(wv[w])+'\n')
-	w_vocab_writer.close()
+# 	w_vocab_writer = codecs.open(os.path.abspath(dest)+'.word','w',encoding='utf8')
+# 	for w in wv.keys():
+# 		w_vocab_writer.write(w+' '+str(wv[w])+'\n')
+# 	w_vocab_writer.close()
 	
 	result['words'] = wv
 
-	p_vocab_writer = codecs.open(os.path.abspath(dest)+'.pos','w',encoding='utf8')
-	for i, p in enumerate(pos_vocab):
-		p_vocab_writer.write(p+' '+str(i)+'\n')
-	p_vocab_writer.close()
+# 	p_vocab_writer = codecs.open(os.path.abspath(dest)+'.pos','w',encoding='utf8')
+# 	for i, p in enumerate(pos_vocab):
+# 		p_vocab_writer.write(p+' '+str(i)+'\n')
+# 	p_vocab_writer.close()
 	
 	result['pos'] = {p: i for i, p in enumerate(pos_vocab)}
 
-	l_vocab_writer = codecs.open(os.path.abspath(dest)+'.labels','w',encoding='utf8')
-	for i, d in enumerate(label_vocab):
-		l_vocab_writer.write(d+' '+str(i)+'\n')
-	l_vocab_writer.close()
+# 	l_vocab_writer = codecs.open(os.path.abspath(dest)+'.labels','w',encoding='utf8')
+# 	for i, d in enumerate(label_vocab):
+# 		l_vocab_writer.write(d+' '+str(i)+'\n')
+# 	l_vocab_writer.close()
 	
 	result['labels'] = {l: i for i, l in enumerate(label_vocab)}
 
-	a_vocab_writer = codecs.open(os.path.abspath(dest)+'.actions','w',encoding='utf8')
-	a_vocab_writer.write('SHIFT'+' 0' +'\n')
-	for i, d in enumerate(label_vocab):
-		a_vocab_writer.write('LEFT-ARC:'+d+' '+str(i+1)+'\n')
-	for i, d in enumerate(label_vocab):
-		a_vocab_writer.write('RIGHT-ARC:'+d+' '+str(i+1+len(label_vocab))+'\n')
+# 	a_vocab_writer = codecs.open(os.path.abspath(dest)+'.actions','w',encoding='utf8')
+# 	a_vocab_writer.write('SHIFT'+' 0' +'\n')
+# 	for i, d in enumerate(label_vocab):
+# 		a_vocab_writer.write('LEFT-ARC:'+d+' '+str(i+1)+'\n')
+# 	for i, d in enumerate(label_vocab):
+# 		a_vocab_writer.write('RIGHT-ARC:'+d+' '+str(i+1+len(label_vocab))+'\n')
 
-	a_vocab_writer.close()
+# 	a_vocab_writer.close()
 
 	actionlist = ['SHIFT']
 	actionlist += ['LEFT-ARC:'+d for d in label_vocab]

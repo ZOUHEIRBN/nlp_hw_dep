@@ -19,8 +19,7 @@ def generate_(src, dest):
                     wf, pf,lf = conf.features()
                     writer.write(' '.join(wf) + ' ' + ' '.join(pf)  + ' ' + ' '.join(lf)+ ' ' + label + '\n')
                     conf.do(act, l)
-            #if (i+1) % 100 == 0: sys.stdout.write(str(i+1) + '...')
-	    results.append({
+            results.append({
 	    	"word_features": wf,
 	    	"pos_features": pf,
 	    	"label_features": lf,

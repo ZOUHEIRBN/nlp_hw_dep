@@ -6,7 +6,7 @@ import tqdm
 def generate_(src, dest):
     
     writer = codecs.open(os.path.abspath(dest), 'w', encoding='utf-8')
-    conll_data = read_conll(src)
+    conll_data = [e for e in read_conll(src)]
     with tqdm.tqdm(total=len(conll_data), position=0, leave=True) as pbar:
         for i, sen in enumerate(conll_data):
             if is_projective([e.head for e in sen[1:]]):

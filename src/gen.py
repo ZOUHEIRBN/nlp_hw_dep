@@ -1,6 +1,7 @@
 import os, sys
 from .utils import *
 from .configuration import Configuration
+import tqdm
 
 def generate_(src, dest):
     
@@ -17,7 +18,7 @@ def generate_(src, dest):
                     writer.write(' '.join(wf) + ' ' + ' '.join(pf)  + ' ' + ' '.join(lf)+ ' ' + label + '\n')
                     conf.do(act, l)
             #if (i+1) % 100 == 0: sys.stdout.write(str(i+1) + '...')
-	    pbar.update(1)
+            pbar.update(1)
     writer.close()
     print('done')
 

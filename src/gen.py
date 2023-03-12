@@ -29,7 +29,7 @@ def generate_(src, dest):
 	    })
             pbar.update(1)
     writer.close()
-    return json.dumps(results, indent=4)
+    return results
 
 
 if __name__ == "__main__":
